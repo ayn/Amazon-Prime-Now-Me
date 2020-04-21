@@ -54,7 +54,7 @@ OptionParser.new do |opts|
     options[:zipcode] = f
   end
 
-  opts.on('-k', '--api-key TEXTBELT_API_KEY', "Textbelt API Key") do |f|
+  opts.on('-k', '--api-key TEXTBELT_API_KEY', "Textbelt API Key, use key=textbelt to send 1 free text per day, see https://textbelt.com") do |f|
     options[:apikey] = f
   end
 
@@ -63,7 +63,7 @@ OptionParser.new do |opts|
   end
 end.parse!
 
-raise OptionParser::MissingArgument if options[:email].nil? || options[:password].nil? || options[:sms].nil? || options[:apikey].nil? || options[:merchant_id].nil?
+raise OptionParser::MissingArgument, "run ./prime-now-me.rb --help for usage" if options[:email].nil? || options[:password].nil? || options[:sms].nil? || options[:apikey].nil? || options[:merchant_id].nil?
 
 @checkout_url = "https://primenow.amazon.com/checkout/enter-checkout?merchantId=#{options[:merchant_id]}&ref=pn_sc_ptc_bwr"
 
