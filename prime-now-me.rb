@@ -81,9 +81,9 @@ while true
   else
     uri = URI.parse("https://textbelt.com/text")
     Net::HTTP.post_form(uri, {
-      phone: options[:sms],
+      phone:    options[:sms],
       message: 'Prime Now delivery window found!',
-      :key => options[:apikey]
+      key:     options[:apikey]
     })
 
     # once found, maybe sleep longer here? 12 hours?
