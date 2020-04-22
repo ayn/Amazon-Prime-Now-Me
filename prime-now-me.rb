@@ -91,4 +91,6 @@ while true
     # once found, maybe sleep longer here? 12 hours?
     sleep 43200
   end
+
+  @driver.navigate.to @checkout_url
 end
