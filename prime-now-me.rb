@@ -76,9 +76,11 @@ submit_zipcode(options[:zipcode]) if @driver.page_source.include? "Enter your ZI
 submit_login(options[:email], options[:password]) if @driver.page_source.include? "Sign-In"
 
 while true
-  if @driver.page_source.include? "No delivery windows available. New windows are released throughout the day"
+  if @driver.page_source.include? "No delivery windows available."
+    puts "no windows, sleeping for 5 minutes"
     sleep 300
   else
+    puts "delivery window found, sending text"
     uri = URI.parse("https://textbelt.com/text")
     Net::HTTP.post_form(uri, {
       phone:    options[:sms],
