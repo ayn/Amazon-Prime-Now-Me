@@ -76,6 +76,8 @@ submit_zipcode(options[:zipcode]) if @driver.page_source.include? "Enter your ZI
 submit_login(options[:email], options[:password]) if @driver.page_source.include? "Sign-In"
 
 while true
+  @driver.navigate.to @checkout_url
+
   if @driver.page_source.include? "No delivery windows available."
     puts "no windows, sleeping for 5 minutes"
     sleep 300
@@ -91,6 +93,4 @@ while true
     # once found, maybe sleep longer here? 12 hours?
     sleep 43200
   end
-
-  @driver.navigate.to @checkout_url
 end
