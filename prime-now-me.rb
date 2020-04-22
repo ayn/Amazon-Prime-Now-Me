@@ -9,7 +9,7 @@ def submit_zipcode zip
   form = @driver.find_element(id: 'locationSelectForm')
   form.find_element(id: 'lsPostalCode').send_keys(zip)
   form.submit
-  sleep 2
+  sleep 5
   @driver.navigate.to @checkout_url
 end
 
@@ -18,10 +18,9 @@ def submit_login email, password
   form.find_element(:name, "email").send_keys(email)
   form.find_element(:name, "password").send_keys(password)
   form.submit
-  sleep 2
+  sleep 5
 
   if @driver.page_source.include? "Enter OTP"
-    sleep 2
     puts "Enter OTP: "
     otp = STDIN.gets.chomp
     form = @driver.find_element(:id, "auth-mfa-form")
@@ -29,9 +28,8 @@ def submit_login email, password
     form.submit
   end
 
-  sleep 2
+  sleep 5
   @driver.navigate.to @checkout_url
-  sleep 2
 end
 
 options = {}
@@ -77,6 +75,7 @@ submit_login(options[:email], options[:password]) if @driver.page_source.include
 
 while true
   @driver.navigate.to @checkout_url
+  sleep 5
 
   if @driver.page_source.include? "No delivery windows available."
     puts "no windows, sleeping for 5 minutes"
